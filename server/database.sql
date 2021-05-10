@@ -1,20 +1,30 @@
--- Steps to create database
-
-CREATE DATABASE pernauth;
-
--- set extention to create unique ids
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
-
--- NOT NULL - useless to save person if column is empty
-CREATE TABLE users( 
-    user_id uuid PRIMARY KEY DEFAULT 
-    uuid_generate_v4(),
-    user_name VARCHAR(255) NOT NULL,
-    user_email VARCHAR(255) NOT NULL,
-    user_password VARCHAR(255) NOT NULL 
-);
-
--- insert fake users
-INSERT INTO users(user_name, user_email, user_password) VALUES ('Matthew', 'matt@2go.go', 'pass');
-
+-- -- Steps to create database
+-- CREATE DATABASE postiedatabase;
+ -- -- users
+-- CREATE TABLE users(
+--     user_id UUID DEFAULT uuid_generate_v4(),
+--     user_name VARCHAR(255) NOT NULL,
+--     user_email VARCHAR(255) NOT NULL UNIQUE,
+--     user_password VARCHAR(255) NOT NULL,
+--     PRIMARY KEY (user_id)
+-- );
+ -- -- todos
+ -- CREATE TABLE todos(
+--     todo_id SERIAL,
+--     user_id UUID,
+--     description VARCHAR(255) NOT NULL,
+--     PRIMARY KEY (todo_id),
+--     FOREIGN KEY (user_id) REFERENCES users(user_id)
+-- );
+ -- -- set extention to create unique ids
+-- CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+ -- -- view the contraints
+-- \d+ todos
+ -- -- fake users data
+-- INSERT INTO users (user_name, user_email, user_password) VALUES ('Jacob', 'jacob@gmail.com', 'pass4321');
+ -- -- fake todos data
+-- INSERT INTO todos (user_id, description) VALUES ('aa1ab749-90c6-4748-a0d3-4066a6cc09b5', 'Jabob no last name was here');
+-- INSERT INTO todos (user_id, description) VALUES ('f49d5b4c-2b00-4ce7-a10e-a20369d77fb7', 'Jakoob la tu tu came was there');
+ -- -- Select with JOIN
+-- SELECT * from users INNER JOIN todos ON users.user_id = todos.user_id;
+-- SELECT * from users LEFT JOIN todos ON users.user_id = todos.user_id;
