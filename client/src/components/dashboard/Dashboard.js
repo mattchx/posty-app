@@ -1,7 +1,16 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Button, Text, Center, Box } from '@chakra-ui/react';
+import {
+  Button,
+  Text,
+  Center,
+  Box,
+  Flex,
+  Heading,
+  Spacer,
+} from '@chakra-ui/react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { ColorModeSwitcher } from '../style/ColorModeSwitcher';
 
 import InputTodo from './todolist/InputTodo';
 import ListTodos from './todolist/ListTodos';
@@ -82,14 +91,24 @@ const Dashboard = ({ setAuth }) => {
 
   return (
     <Fragment>
-      <Text fontSize="5xl">Dashboard</Text>
-      <Text fontSize="2xl">Welcome {name}</Text>
+      <Flex p="4" bg="teal.300">
+        <Flex align="center">
+          <Heading as="i" size="lg" mr="3">
+            Posty
+          </Heading>
+          <Heading fontSize="md">Dashboard</Heading>
+        </Flex>
 
-      <Button onClick={e => logout(e)}>Log out</Button>
+        <Spacer />
+        <Box>
+          <ColorModeSwitcher mr="4" />
+          <Button onClick={e => logout(e)}>Log out</Button>
+        </Box>
+      </Flex>
 
       <Center mt={20}>
         <Box width={500}>
-          <InputTodo handleAddTodo={handleAddTodo} />
+          <InputTodo username={name} handleAddTodo={handleAddTodo} />
           <Center>
             <ListTodos
               todos={todos}
