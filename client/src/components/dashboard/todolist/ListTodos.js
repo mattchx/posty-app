@@ -46,7 +46,7 @@ const ListTodo = ({
     try {
       const res = await axios.put(
         `http://localhost:5000/dashboard/todos/complete/${id}`,
-        { complete: toggle.toString() },
+        { complete: toggle },
         axiosConfig
       );
       handleCompletedTodo(res.data);
