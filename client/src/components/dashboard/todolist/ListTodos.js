@@ -18,6 +18,13 @@ const ListTodo = ({
   handleEditingState,
   handleUpdatedTodo,
 }) => {
+  const axiosConfig = {
+    headers: {
+      'Content-Type': 'application/json',
+      token: localStorage.token,
+    },
+  };
+
   const initalTempTodos = todos.reduce((acc, cur) => {
     return { ...acc, [cur.todo_id]: cur.description };
   }, {});
@@ -25,7 +32,10 @@ const ListTodo = ({
 
   const deleteTodo = async id => {
     try {
-      await axios.delete(`http://localhost:5000/dashboard/todos/${id}`);
+      await axios.delete(
+        `http://localhost:5000/dashboard/todos/${id}`,
+        axiosConfig
+      );
       handleDeleteTodo(id);
     } catch (err) {
       console.log(err.message);
@@ -36,9 +46,8 @@ const ListTodo = ({
     try {
       const res = await axios.put(
         `http://localhost:5000/dashboard/todos/complete/${id}`,
-        {
-          complete: toggle.toString(),
-        }
+        { complete: toggle.toString() },
+        axiosConfig
       );
       handleCompletedTodo(res.data);
     } catch (err) {
@@ -61,9 +70,8 @@ const ListTodo = ({
     try {
       const res = await axios.put(
         `http://localhost:5000/dashboard/todos/update/${id}`,
-        {
-          description: newText,
-        }
+        { description: newText },
+        axiosConfig
       );
       handleUpdatedTodo(res.data);
     } catch (err) {
