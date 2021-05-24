@@ -1,13 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import {
-  Button,
-  Text,
-  Center,
-  Box,
-  Flex,
-  Heading,
-  Spacer,
-} from '@chakra-ui/react';
+import { Button, Center, Box, Flex, Heading, Spacer } from '@chakra-ui/react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { ColorModeSwitcher } from '../style/ColorModeSwitcher';
