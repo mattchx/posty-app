@@ -86,7 +86,22 @@ const ListTodo = ({
           return (
             <Fragment key={item.todo_id}>
               <Flex mt={3}>
-                {!item.complete && item.editing ? (
+                {item.complete ? (
+                  <>
+                    <chakra.span cursor="pointer">
+                      <Text
+                        complete
+                        color="gray"
+                        as="s"
+                        onClick={() =>
+                          todoIsComplete(item.todo_id, item.complete)
+                        }
+                      >
+                        {item.description}
+                      </Text>
+                    </chakra.span>
+                  </>
+                ) : item.editing ? (
                   <>
                     <form onSubmit={e => saveEdit(e, item.todo_id)}>
                       <Input
@@ -112,7 +127,7 @@ const ListTodo = ({
                       </Button>
                     </form>
                   </>
-                ) : !item.complete ? (
+                ) : (
                   <>
                     <chakra.span cursor="pointer">
                       <Text
@@ -139,19 +154,6 @@ const ListTodo = ({
                       Delete
                     </Button>
                   </>
-                ) : (
-                  <chakra.span cursor="pointer">
-                    <Text
-                      complete
-                      color="gray"
-                      as="s"
-                      onClick={() =>
-                        todoIsComplete(item.todo_id, item.complete)
-                      }
-                    >
-                      {item.description}
-                    </Text>
-                  </chakra.span>
                 )}
               </Flex>
               <Divider m={3} />
