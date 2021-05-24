@@ -45,7 +45,6 @@ router.put("/todos/update/:id", authorize, async (req, res) => {
   try {
     const { id } = req.params;
     const { description } = req.body;
-    console.log(description, id, req.user.id);
     const updateTodo = await pool.query(
       "UPDATE todos SET description = ($1) WHERE todo_id = ($2) AND user_id = ($3) RETURNING *;",
       [description, id, req.user.id]
@@ -56,6 +55,26 @@ router.put("/todos/update/:id", authorize, async (req, res) => {
     }
 
     res.json(updateTodo.rows[0]);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+// update a todo as complete
+router.put("/todos/complete/:id", authorize, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { complete } = req.body;
+    const todo = await pool.query(
+      "UPDATE todos SET complete = ($1) WHERE todo_id = ($2) AND user_id = ($3) RETURNING *;",
+      [complete, id, req.user.id]
+    );
+
+    if (todo.rows.length === 0) {
+      return res.json("This todo is not yours.");
+    }
+
+    res.json(todo.rows[0]);
   } catch (err) {
     console.error(err);
   }
