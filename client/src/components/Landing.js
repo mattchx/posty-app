@@ -14,10 +14,10 @@ const Landing = () => (
       <Heading as="h2" size="3xl" fontWeight="extrabold" letterSpacing="tight">
         Welcome to
         <br />
-        Postie App
+        Posty App
       </Heading>
       <Text mt="4" fontSize="lg">
-        Log in and start your first postie
+        Log in and start your first posty
       </Text>
       <Flex justify="center" mt="8">
         <Button
