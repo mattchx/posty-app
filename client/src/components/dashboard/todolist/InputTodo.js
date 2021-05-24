@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FormControl, FormLabel, Input, Button, Flex } from '@chakra-ui/react';
 
 import axios from 'axios';
-const InputTodo = ({ handleAddTodo }) => {
+const InputTodo = ({ handleAddTodo, username }) => {
   const [description, setDescription] = useState('');
 
   const submitFormHandler = async e => {
@@ -32,7 +32,7 @@ const InputTodo = ({ handleAddTodo }) => {
     <form onSubmit={submitFormHandler}>
       <FormControl id="email">
         <Flex align="center">
-          <FormLabel fontSize="4xl">To Do</FormLabel>
+          <FormLabel fontSize="4xl">{username}'s notes</FormLabel>
         </Flex>
         <Flex>
           <Input
